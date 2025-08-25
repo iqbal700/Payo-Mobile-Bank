@@ -28,14 +28,14 @@ AddBtn.addEventListener('click', function() {
 
 // ==-== withdraw Money Section ==-== //
 
-    const withdrawBtn = document.getElementById('withdrawBtn')
+    const withdrawBtn = document.getElementById('withdrawBtn');
 
     withdrawBtn.addEventListener('click', function() {
 
         // =-= get value from input =-= //
 
       const agentNum = document.getElementById('agent-num').value;
-      const AmountNum = parseInt(document.getElementById('amount-num').value);
+      const AmountNum = parseInt(document.getElementById('amount-count').value);
       const pinNumNum = document.getElementById('pin-num').value;
       let totMoney = parseInt (document.getElementById('tot-money').innerText);
 
@@ -58,6 +58,7 @@ AddBtn.addEventListener('click', function() {
             document.getElementById('AddBtn')
                 .innerText = 'Add Money';         
 })
+
 
 
     // =-= Toggling section ==-= //
