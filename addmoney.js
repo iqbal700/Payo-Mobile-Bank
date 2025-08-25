@@ -22,6 +22,12 @@ AddBtn.addEventListener('click', function() {
              AddBtn.style.backgroundColor = 'green';
                 document.getElementById('AddBtn')
                  .innerText = 'Add Money Sucessfull';
+
+        // show withdraw message
+            const innerTxt = document.getElementById('withdrawBtn').innerText
+            withdrawBtn.style.backgroundColor = '#0874F2';
+            document.getElementById('withdrawBtn')
+                .innerText = 'Withdraw Money '
                                
 })
 
