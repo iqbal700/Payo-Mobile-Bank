@@ -61,10 +61,28 @@ AddBtn.addEventListener('click', function() {
     })
 
 
+    // ==-== Get Bonus section ==-== //
 
+    const bonusBtn = document.getElementById('bonus-Btn');
 
+    bonusBtn.addEventListener('click', function() {
 
-    // =-= Toggling Features ==-= //
+        const couponNum = 1234;
+        const couponBonus = 1000;
+        const currentMoney = getInnerText('current-money');
+        const couponValue = getInputValue('bonus-coupon');
+
+        if ( couponNum === couponValue ) {
+            const bonusBalance = currentMoney + 1000;
+            document.getElementById('current-money')
+                .innerText = bonusBalance;
+        }
+
+    
+    })
+
+    
+    // =-=-= Toggling Features section Here  =-=-= //
 
  
 
@@ -87,6 +105,7 @@ AddBtn.addEventListener('click', function() {
     })
 
     // *** cash out ***
+    
     document.getElementById('cash-btn').addEventListener('click', function() {
 
          toggleHandle('cash-out');
@@ -123,9 +142,24 @@ AddBtn.addEventListener('click', function() {
        
     })
 
+    // ***  Get Bonus ***
 
-   
+    document.getElementById('bonus-btn').addEventListener('click', function() {
 
+        toggleHandle('bonus-money')
+
+         const formBtns = document.getElementsByClassName('features-btn');
+
+         for(const formBtn of formBtns ) {
+                formBtn.classList.remove("border-blue-700","bg-gray-100" )
+                formBtn.classList.add('border-gray-300')
+
+         }
+
+         document.getElementById('bonus-btn').classList.remove('border-gray-300');
+         document.getElementById('bonus-btn').classList.add("border-blue-700","bg-gray-100");
+       
+    })
 
     
     // *** logout section *** 
