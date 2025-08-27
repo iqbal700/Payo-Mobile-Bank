@@ -16,6 +16,10 @@ AddBtn.addEventListener('click', function() {
      document.getElementById('current-money')
           .innerText = availableBalance;
 
+      // function for trans history 
+
+         transactionHistory('Add Money');
+
 })
 
 
@@ -37,6 +41,10 @@ AddBtn.addEventListener('click', function() {
     const remainingBalance = currentMoney - AmountNum;
             document.getElementById('current-money')
                 .innerText = remainingBalance;
+
+        // function for trans history 
+
+           transactionHistory('Cash out');
     
     })
 
@@ -58,6 +66,10 @@ AddBtn.addEventListener('click', function() {
         document.getElementById('current-money')
             .innerText = newBalance;
 
+         // function for trans history 
+
+            transactionHistory('Transfer Money');
+
     })
 
 
@@ -78,11 +90,75 @@ AddBtn.addEventListener('click', function() {
                 .innerText = bonusBalance;
         }
 
+        // function for trans history 
+
+           transactionHistory('Get Bonus');
+
     
     })
 
+
+    // ==-== Pay Bill section  ==-== //
+
+    const payBtn = document.getElementById('payBtn');
+
+    payBtn.addEventListener('click', function() {
+
+          getInputValue('bill-bank-name');
+          getInputValue('bill-acc-num');
+          getInputValue('bill-pin-num');
+         const billAmount =  getInputValue('bill-amount-num');
+         const currentMoney =  getInnerText('current-money');
+
+         let restBalance = currentMoney - billAmount;
+
+         document.getElementById('current-money')
+            .innerText = restBalance;
+
+        console.log(currentMoney);  // support session qs ??
+
+        // function for trans history 
+
+           transactionHistory('Pay Bill');
+    })
+
+
+      // ==-== Transaction History section  ==-== //
+
+      const transactionBtn = document.getElementById('transac-btn');
+      
+      transactionBtn.addEventListener('click', function() {
+
+            const transactionContainer = document.getElementById('trans-history');
+             transactionContainer.innerHTML = '';
+
+            for ( const data of transactionData) {
+
+                const div = document.createElement('div');
+
+                div.innerHTML = `
+                    
+            <div class="flex justify-between items-center bg-white rounded-lg p-1.5 mt-5">
+                <div class="flex items-center gap-3">
+                <img class=" p-1.5 rounded-full bg-[#f4f5f7]" src="images/wallet1.png" alt="wallet">
+                <div>
+                    <h1 class="font-bold">${data.name}</h1>
+                    <p class="font-semibold">${data.date}</p>
+                </div>
+                </div>
+            <div><i class="fa-solid fa-ellipsis-vertical"></i></div> 
+            </div>
+                
+            `
+            transactionContainer.appendChild(div);
+
+            }
+
+      })
+
+
     
-    // =-=-= Toggling Features section Here  =-=-= //
+    // ***** Toggling Features section Here ***** //
 
  
 
@@ -161,6 +237,45 @@ AddBtn.addEventListener('click', function() {
        
     })
 
+
+    // *** pay bill section *** 
+
+    document.getElementById('bill-btn').addEventListener('click', function() {
+
+        toggleHandle('pay-bill');
+
+        const formBtns = document.getElementsByClassName('features-btn');
+
+        for ( const formBtn of formBtns) {
+                formBtn.classList.remove("border-blue-700", 'bg-gray-100');
+                formBtn.classList.add('border-gray-300');
+        }
+
+        document.getElementById('bill-btn').classList.remove('border-gray-300');
+        document.getElementById('bill-btn').classList.add('border-blue-700', 'bg-gray-100')
+
+    }) 
+
+    // *** Transaction section *** //
+
+    document.getElementById('transac-btn').addEventListener('click', function() {
+
+        toggleHandle('transaction');
+        console.log('click')
+
+        const formBtns = document.getElementsByClassName('features-btn');
+        for ( const formBtn of formBtns) {
+
+            formBtn.classList.remove("border-blue-700", 'bg-gray-100');
+            formBtn.classList.add('border-gray-300');
+        }
+
+        
+        document.getElementById('transac-btn').classList.remove('border-gray-300');
+        document.getElementById('transac-btn').classList.add('border-blue-700', 'bg-gray-100')
+
+    })
+
     
     // *** logout section *** 
 
@@ -176,17 +291,17 @@ AddBtn.addEventListener('click', function() {
     
     // get value from input element 
 
-    function getInputValue(id) {
-        const inputValue = document.getElementById(id).value;
-        return parseInt(inputValue);
-    }
+        function getInputValue(id) {
+            const inputValue = document.getElementById(id).value;
+            return parseInt(inputValue);
+        }
 
     // get innerText 
 
-    function getInnerText(id) {
-        const innerTxt = document.getElementById(id).innerText;
-        return parseFloat(innerTxt);
-    } 
+        function getInnerText(id) {
+            const innerTxt = document.getElementById(id).innerText;
+            return parseFloat(innerTxt);
+        } 
 
     // Toggling function
 
@@ -199,3 +314,18 @@ AddBtn.addEventListener('click', function() {
         document.getElementById(id).style.display = 'block'
     }
 
+    // transaction history 
+
+        const transactionData = [];
+
+        function transactionHistory(nam) { 
+
+        const data = {
+            name : nam,
+            date : new Date().toLocaleTimeString()
+        }
+
+        transactionData.push(data);
+        console.log(transactionData)
+
+        }
